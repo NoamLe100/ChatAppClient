@@ -38,6 +38,7 @@ export function SocketTest() {
       <button onClick={() => socket?.emit('message',{groupId,text:textId})}>
       Send
       </button>
+      
     </div>
     <ul>
       {messages.map((msg,i)=> <li key={i}>{msg}</li>)}

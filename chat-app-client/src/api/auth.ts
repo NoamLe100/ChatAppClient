@@ -1,4 +1,11 @@
 import axios from "axios";
+import { jwtDecode } from 'jwt-decode';
+
+
+
+type JwtPayload = {
+  userId: number;
+};
 
 const API_URL = 'http://localhost:3000'
 
@@ -15,4 +22,12 @@ export async function login(email:string,password:string) {
         password,
     })
     return response.data;   
+}
+
+export function getMyUserId(): number | null {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+
+  const decoded = jwtDecode<JwtPayload>(token);
+  return decoded.userId;
 }
