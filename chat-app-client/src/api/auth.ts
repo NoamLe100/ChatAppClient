@@ -1,33 +1,35 @@
 import axios from "axios";
-import { jwtDecode } from 'jwt-decode';
 
+const API_URL = 'http://localhost:3000';
 
+axios.defaults.withCredentials = true;
 
-type JwtPayload = {
-  userId: number;
-};
+export async function register(email: string, password: string) {
+  const response = await axios.post(`${API_URL}/users/register`, {
+    email,
+    password,
+  });
+  return response.data;
+}
 
-const API_URL = 'http://localhost:3000'
+export async function login(email: string, password: string) {
+  const response = await axios.post(`${API_URL}/users/singIn`, {
+    email,
+    password,
+  });
+  return response.data;
+}
 
-export async function register(email:string , password:string) {
-    const response = await axios.post(`${API_URL}/users/register`,{
-        email,
-        password,
-    });
+export async function getMe(): Promise<{ userId: number } | null> {
+  try {
+    const response = await axios.get(`${API_URL}/users/me`);
     return response.data;
-}
-export async function login(email:string,password:string) {
-    const response =await axios.post(`${API_URL}/users/singIn`,{
-        email,
-        password,
-    })
-    return response.data;   
+  } catch {
+    return null;
+  }
 }
 
-export function getMyUserId(): number | null {
-  const token = localStorage.getItem('token');
-  if (!token) return null;
-
-  const decoded = jwtDecode<JwtPayload>(token);
-  return decoded.userId;
+export async function logout() {
+  await axios.post(`${API_URL}/users/logout`);
 }
+
