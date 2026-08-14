@@ -1,18 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { Sidebar } from '../Sidebar';
 import { ChatWindow } from '../ChatWindow';
-
-type Chat = {
-  id: number;
-  name: string | null;
-  isGroup: boolean;
-  pic: string | null;
-  code: string | null;
-};
+import { getMyChats } from '../../api/chat';
+import { useSocket } from '../../hooks/useSocket';
+import { type Chat } from '../../utils/chatLabel';
 
 export function ChatLayout() {
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
+  const socket = useSocket();
+
+  useEffect(() => {
+    if (!socket) return;
+
+    getMyChats().then((chats: Chat[]) => {
+      chats.forEach((chat) => {
+        socket.emit('joinRoom', chat.id.toString());
+      });
+    });
+  }, [socket]);
 
   return (
     <Box sx={{ display: 'flex', height: '100vh', bgcolor: '#1e1f22' }}>

@@ -9,6 +9,7 @@ export function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
   const [error, setError] = useState('');
 
   const registretion = async () => {
@@ -18,11 +19,11 @@ export function Register() {
     }
 
     try {
-      await register(email, password);
+      await register(email, password, userName);
       navigate('/chat');
     }
     catch (err) {
-      setError('Registration failed. Email may already be in use.');
+      setError('Registration failed. Email or username may already be in use.');
     }
   }
 
@@ -47,6 +48,14 @@ export function Register() {
         <Typography variant="h5" sx={{ color: 'white', mb: 2 }}>
           create a user
         </Typography>
+
+        <TextField
+          fullWidth
+          label="username"
+          value={userName}
+          margin="normal"
+          onChange={(e) => setUserName(e.target.value)}
+        />
 
         <TextField
           fullWidth
