@@ -11,3 +11,20 @@ export async function joinByCode(code: string) {
   const response = await axios.post(`${API_URL}/chat/joinByCode`, { code });
   return response.data;
 }
+
+
+export async function searchUsers(query: string) {
+  const response = await axios.get(`${API_URL}/users/search`, {
+    params: { query },
+  });
+  return response.data;
+}
+
+export async function startPrivateChat(userId: number) {
+  const response = await axios.post(`${API_URL}/chat/startPrivateChat`, { userId });
+  return response.data;
+}
+export async function addMember(chatId: number, userId: number) {
+  const response = await axios.post(`${API_URL}/chat/addMember`, { Chatid: chatId, userId });
+  return response.data;
+}

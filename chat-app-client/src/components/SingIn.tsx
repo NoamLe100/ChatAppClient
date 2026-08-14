@@ -7,11 +7,12 @@ export function SignIn() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [userName,setUserName] = useState(' ')
     const [error, setError] = useState('');
 
     const handelLogIn = async () => {
         try {
-          await login(email, password);
+          await login(email, password,userName);
           navigate('/chat');
         }
         catch(err) {
@@ -39,6 +40,14 @@ export function SignIn() {
           <Typography variant="h5" sx={{ color: 'white', mb: 2 }}>
             log in
           </Typography>
+
+             <TextField
+          fullWidth
+          label="username"
+          value={userName}
+          margin="normal"
+          onChange={(e) => setUserName(e.target.value)}
+        />
 
           <TextField
             fullWidth

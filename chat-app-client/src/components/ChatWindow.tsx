@@ -6,20 +6,13 @@ import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
 import { getMe } from '../api/auth';
 import { useSocket } from '../hooks/useSocket';
+import { getChatLabel, type Chat } from '../utils/chatLabel';
 
 type Message = {
   id: number;
   senderId: number;
   text: string;
   groupId: number;
-};
-
-type Chat = {
-  id: number;
-  name: string | null;
-  isGroup: boolean;
-  pic: string | null;
-  code: string | null;
 };
 
 type ChatWindowProps = {
@@ -75,7 +68,7 @@ export function ChatWindow({ chat }: ChatWindowProps) {
     );
   }
 
-  const label = chat.name || 'Unnamed chat';
+  const label = getChatLabel(chat, myUserId);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>

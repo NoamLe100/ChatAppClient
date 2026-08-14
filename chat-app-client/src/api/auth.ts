@@ -4,18 +4,20 @@ const API_URL = 'http://localhost:3000';
 
 axios.defaults.withCredentials = true;
 
-export async function register(email: string, password: string) {
+export async function register(email: string, password: string,userName:string) {
   const response = await axios.post(`${API_URL}/users/register`, {
     email,
     password,
+    userName,
   });
   return response.data;
 }
 
-export async function login(email: string, password: string) {
+export async function login(email: string, password: string,userName:string) {
   const response = await axios.post(`${API_URL}/users/singIn`, {
     email,
     password,
+    userName,
   });
   return response.data;
 }
