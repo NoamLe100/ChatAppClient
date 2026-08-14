@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Paper, TextField, Button, Typography } from "@mui/material";
+import { Box, Paper, TextField, Button, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { login } from "../api/auth";
 
@@ -7,15 +7,15 @@ export function SignIn() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handelLogIn = async () => {
         try {
-          const data = await login(email, password);
-          localStorage.setItem('token', data.token);
+          await login(email, password);
           navigate('/chat');
         }
         catch(err) {
-            alert('somting is worng')
+            setError('Invalid email or password.');
         }
     }
     return (
@@ -42,6 +42,7 @@ export function SignIn() {
 
           <TextField
             fullWidth
+            type="email"
             label="mail"
             value={email}
             margin="normal"
@@ -54,7 +55,6 @@ export function SignIn() {
             label="password"
             margin="normal"
             value={password}
-              slotProps={{ htmlInput: { minLength: 6 } }}
             onChange={(e) => setPassword(e.target.value)}
           />
 
@@ -62,6 +62,20 @@ export function SignIn() {
             log in
           </Button>
         </Paper>
+
+        <Dialog open={error !== ''} onClose={() => setError('')}>
+          <DialogTitle sx={{ bgcolor: '#2b2d31', color: '#f23f42' }}>
+            Login Failed
+          </DialogTitle>
+          <DialogContent sx={{ bgcolor: '#2b2d31', color: 'white', pt: 2 }}>
+            {error}
+          </DialogContent>
+          <DialogActions sx={{ bgcolor: '#2b2d31' }}>
+            <Button onClick={() => setError('')} sx={{ color: '#5865f2' }}>
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     )
 }

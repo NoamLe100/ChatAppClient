@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
-import { getMessages, sendMessage } from '../api/messages';
+import { Box, Typography, Avatar } from '@mui/material';
+import ForumIcon from '@mui/icons-material/Forum';
+import { getMessages } from '../api/messages';
 import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
-import { getMyUserId } from '../api/auth';
+import { getMe } from '../api/auth';
+import { useSocket } from '../hooks/useSocket';
 
 type Message = {
   id: number;
@@ -12,13 +14,27 @@ type Message = {
   groupId: number;
 };
 
-type ChatWindowProps = {
-  selectedChatId: number | null;
+type Chat = {
+  id: number;
+  name: string | null;
+  isGroup: boolean;
+  pic: string | null;
+  code: string | null;
 };
 
-export function ChatWindow({ selectedChatId }: ChatWindowProps) {
+type ChatWindowProps = {
+  chat: Chat | null;
+};
+
+export function ChatWindow({ chat }: ChatWindowProps) {
   const [messages, setMessages] = useState<Message[]>([]);
-  const myUserId = getMyUserId();
+  const [myUserId, setMyUserId] = useState<number | null>(null);
+  const socket = useSocket();
+  const selectedChatId = chat?.id ?? null;
+
+  useEffect(() => {
+    getMe().then(data => setMyUserId(data?.userId ?? null));
+  }, []);
 
   const loadMessages = () => {
     if (!selectedChatId) return;
@@ -29,22 +45,50 @@ export function ChatWindow({ selectedChatId }: ChatWindowProps) {
     loadMessages();
   }, [selectedChatId]);
 
-  const handleSend = async (text: string) => {
-    if (!selectedChatId) return;
-    await sendMessage(selectedChatId, text);
-    loadMessages();
+  useEffect(() => {
+    if (!selectedChatId || !socket) return;
+    socket.emit('joinRoom', selectedChatId.toString());
+  }, [selectedChatId, socket]);
+
+  useEffect(() => {
+    if (!socket) return;
+    socket.on('message', (newMessage: Message) => {
+      setMessages((prev) => [...prev, newMessage]);
+    });
+    return () => {
+      socket.off('message');
+    };
+  }, [socket]);
+
+  const handleSend = (text: string) => {
+    if (!selectedChatId || !socket) return;
+    const roomId = `room_${selectedChatId}`;
+    socket.emit('message', { roomId, text });
   };
 
-  if (!selectedChatId) {
+  if (!chat) {
     return (
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-        <Typography sx={{ color: '#8e9297' }}>Select a chat to start messaging</Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 2 }}>
+        <ForumIcon sx={{ fontSize: 64, color: '#404249' }} />
+        <Typography sx={{ color: '#80848e' }}>Select a chat to start messaging</Typography>
       </Box>
     );
   }
 
+  const label = chat.name || 'Unnamed chat';
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <Box sx={{
+        px: 2, py: 1.5, display: 'flex', alignItems: 'center', gap: 1.5,
+        borderBottom: '1px solid #26282c', boxShadow: '0 1px 0 rgba(0,0,0,0.2)'
+      }}>
+        <Avatar sx={{ width: 32, height: 32, bgcolor: '#5865f2', fontSize: 14 }}>
+          {label[0].toUpperCase()}
+        </Avatar>
+        <Typography sx={{ color: 'white', fontWeight: 600 }}>{label}</Typography>
+      </Box>
+
       <MessageList messages={messages} mySenderId={myUserId} />
       <MessageInput onSend={handleSend} />
     </Box>
