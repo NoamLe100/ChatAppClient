@@ -25,6 +25,11 @@ export async function startPrivateChat(userId: number) {
   return response.data;
 }
 export async function addMember(chatId: number, userId: number) {
-  const response = await axios.post(`${API_URL}/chat/addMember`, { Chatid: chatId, userId });
+  const response = await axios.post(`${API_URL}/chat/addMember`, { Chatid: chatId, userid: userId });
+  return response.data;
+}
+
+export async function getChatDetails(chatId: number) {
+  const response = await axios.get(`${API_URL}/chat/chat/${chatId}`);
   return response.data;
 }
