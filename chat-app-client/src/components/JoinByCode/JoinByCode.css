@@ -1,0 +1,40 @@
+.join-by-code-form {
+  padding: 12px 16px;
+  background-color: #232428;
+}
+
+.join-by-code-form .code-field {
+  margin-bottom: 8px;
+}
+
+.join-by-code-form .code-field .MuiOutlinedInput-root {
+  background-color: #1e1f22;
+  color: white;
+}
+
+.join-by-code-form .join-btn {
+  background-color: #3ba55d !important;
+}
+
+.join-by-code-form .join-btn:hover {
+  background-color: #2d7d46 !important;
+}
+
+.join-by-code-form .dialog-title {
+  background-color: #2b2d31;
+  color: #f23f42;
+}
+
+.join-by-code-form .dialog-content {
+  background-color: #2b2d31;
+  color: white;
+  padding-top: 16px !important;
+}
+
+.join-by-code-form .dialog-actions {
+  background-color: #2b2d31;
+}
+
+.join-by-code-form .dialog-ok-btn {
+  color: #5865f2 !important;
+}

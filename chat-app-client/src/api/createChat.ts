@@ -1,12 +1,10 @@
-import axios from "axios";
-
-const API_URL = 'http://localhost:3000';
+import { api } from './client';
 
 export async function createChat(name: string) {
-  const response = await axios.post(`${API_URL}/chat/CreateChat`, {
-    memberIds: [],
+  const response = await api.post('/chat/CreateChat', {
+    name,
     isGroup: true,
-    name: name,
+    memberIds: [],
   });
   return response.data;
 }

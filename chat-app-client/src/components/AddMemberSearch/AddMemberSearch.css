@@ -1,0 +1,33 @@
+.add-member-search {
+  padding: 12px 16px;
+  background-color: #232428;
+}
+
+.add-member-search .search-field .MuiOutlinedInput-root {
+  background-color: #1e1f22;
+  color: white;
+}
+
+.add-member-search .results-list {
+  margin-top: 8px;
+}
+
+.add-member-search .result-item {
+  border-radius: 4px;
+}
+
+.add-member-search .result-item:hover {
+  background-color: #35373c;
+}
+
+.add-member-search .result-avatar {
+  background-color: #5865f2;
+  width: 28px;
+  height: 28px;
+  font-size: 13px;
+}
+
+.add-member-search .result-name {
+  color: white;
+  font-size: 14px;
+}

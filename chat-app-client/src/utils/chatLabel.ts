@@ -1,18 +1,4 @@
-export type ChatMember = {
-  user: {
-    id: number;
-    userName: string;
-  };
-};
-
-export type Chat = {
-  id: number;
-  name: string | null;
-  isGroup: boolean;
-  pic: string | null;
-  code: string | null;
-  members: ChatMember[];
-};
+import type { Chat } from '../types';
 
 export function getChatLabel(chat: Chat, myUserId: number | null): string {
   if (chat.isGroup) {
@@ -20,5 +6,20 @@ export function getChatLabel(chat: Chat, myUserId: number | null): string {
   }
 
   const otherMember = chat.members.find(m => m.user.id !== myUserId);
-  return otherMember?.user.userName || 'Unknown user';
+  if (!otherMember) return 'Unknown user';
+
+  return otherMember.user.name || otherMember.user.userName;
+}
+
+export function getLastMessagePreview(chat: Chat, myUserId: number | null): string | undefined {
+  if (!chat.lastMessage) return undefined;
+
+  const who = chat.lastMessage.senderId === myUserId ? 'You' : chat.lastMessage.senderName;
+
+  const time = new Date(chat.lastMessage.sentAt).toLocaleTimeString('he-IL', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  return `${who}: ${chat.lastMessage.text} · ${time}`;
 }

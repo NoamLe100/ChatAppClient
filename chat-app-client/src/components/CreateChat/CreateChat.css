@@ -1,0 +1,21 @@
+.create-chat-form {
+  padding: 12px 16px;
+  background-color: #232428;
+}
+
+.create-chat-form .name-field {
+  margin-bottom: 8px;
+}
+
+.create-chat-form .name-field .MuiOutlinedInput-root {
+  background-color: #1e1f22;
+  color: white;
+}
+
+.create-chat-form .create-btn {
+  background-color: #5865f2 !important;
+}
+
+.create-chat-form .create-btn:hover {
+  background-color: #4752c4 !important;
+}

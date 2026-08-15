@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Box, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
-import { joinByCode } from '../api/chat';
+import { joinByCode } from '../../api/chat';
+import './JoinByCode.css';
 
 type JoinByCodeFormProps = {
   onJoined: () => void;
@@ -23,42 +24,39 @@ export function JoinByCodeForm({ onJoined }: JoinByCodeFormProps) {
   };
 
   return (
-    <Box sx={{ px: 2, py: 1.5, bgcolor: '#232428' }}>
+    <div className="join-by-code-form">
       <TextField
         fullWidth
         size="small"
+        className="code-field"
         placeholder="Enter 5-character code"
         value={code}
         onChange={(e) => setCode(e.target.value)}
         onKeyDown={(e) => { if (e.key === 'Enter') handleJoin(); }}
-        sx={{
-          mb: 1,
-          '& .MuiOutlinedInput-root': { bgcolor: '#1e1f22', color: 'white' },
-        }}
       />
       <Button
         fullWidth
         variant="contained"
+        className="join-btn"
         startIcon={<LoginIcon />}
         onClick={handleJoin}
-        sx={{ bgcolor: '#3ba55d', '&:hover': { bgcolor: '#2d7d46' } }}
       >
         Join
       </Button>
 
       <Dialog open={error !== ''} onClose={() => setError('')}>
-        <DialogTitle sx={{ bgcolor: '#2b2d31', color: '#f23f42' }}>
+        <DialogTitle className="dialog-title">
           Join Failed
         </DialogTitle>
-        <DialogContent sx={{ bgcolor: '#2b2d31', color: 'white', pt: 2 }}>
+        <DialogContent className="dialog-content">
           {error}
         </DialogContent>
-        <DialogActions sx={{ bgcolor: '#2b2d31' }}>
-          <Button onClick={() => setError('')} sx={{ color: '#5865f2' }}>
+        <DialogActions className="dialog-actions">
+          <Button onClick={() => setError('')} className="dialog-ok-btn">
             OK
           </Button>
         </DialogActions>
       </Dialog>
-    </Box>
+    </div>
   );
 }

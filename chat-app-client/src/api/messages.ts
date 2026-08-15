@@ -1,8 +1,6 @@
-import axios from "axios";
+import { api } from './client';
 
-const API_URL = 'http://localhost:3000';
-
-export async function getMessages(groupId: number) {
-  const response = await axios.post(`${API_URL}/Massges/getHistory`, { groupId });
+export async function getMessages(chatId: number) {
+  const response = await api.post('/Massges/getHistory', { groupId: chatId });
   return response.data;
 }

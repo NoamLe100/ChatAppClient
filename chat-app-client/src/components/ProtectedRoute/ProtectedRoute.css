@@ -1,0 +1,11 @@
+.route-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #313338;
+}
+
+.route-loading .MuiCircularProgress-root {
+  color: #5865f2;
+}
