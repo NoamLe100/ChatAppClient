@@ -1,13 +1,14 @@
 import { Navigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
-import { useAuth } from '../../hooks/useAuth';
-import './ProtectedRoute.css';
+import { useAuth } from '../../context/AuthContext';
+import './AuthGate.css';
 
-type ProtectedRouteProps = {
+type AuthGateProps = {
   children: React.ReactNode;
+  mode: 'requireAuth' | 'requireGuest';
 };
 
-export function ProtectedRoute({ children }: ProtectedRouteProps) {
+export function AuthGate({ children, mode }: AuthGateProps) {
   const { userId, loading } = useAuth();
 
   if (loading) {
@@ -18,8 +19,12 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     );
   }
 
-  if (!userId) {
+  if (mode === 'requireAuth' && !userId) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (mode === 'requireGuest' && userId) {
+    return <Navigate to="/chat" replace />;
   }
 
   return <>{children}</>;

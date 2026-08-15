@@ -6,6 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 import './Auth.css';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
 export function Auth() {
   const navigate = useNavigate();
@@ -21,6 +22,11 @@ export function Auth() {
       setError('Please enter a valid email address.');
       return;
     }
+      if (mode === 'register' && !PASSWORD_REGEX.test(password)) {
+    setError('Password must be at least 8 characters, with uppercase, lowercase, a number, and a symbol.');
+    return;
+  }
+
 
     try {
       if (mode === 'register') {

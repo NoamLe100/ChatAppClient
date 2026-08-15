@@ -3,10 +3,12 @@ import { Sidebar } from '../Sidebar/Sidebar';
 import { ChatWindow } from '../ChatWindow/ChatWindow';
 import { getMyChats } from '../../api/chat';
 import { useSocket } from '../../hooks/useSocket';
-import { type Chat } from '../../utils/chatLabel';
+import { useAuth } from '../../hooks/useAuth';
+import { type Chat } from '../../types';
 import './ChatLayout.css';
 
 export function ChatLayout() {
+  const { loading } = useAuth();
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
   const socket = useSocket();
 
@@ -20,6 +22,8 @@ export function ChatLayout() {
     });
   }, [socket]);
 
+  if (loading) return null;
+
   return (
     <div className="chat-layout">
       <div className="chat-layout-sidebar">
@@ -31,4 +35,4 @@ export function ChatLayout() {
       </div>
     </div>
   );
-}
+} 
