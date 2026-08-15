@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextField, Button, Typography } from '@mui/material';
 import { updateProfile } from '../../api/auth';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../context/AuthContext';
 import './EditBio.css';
 
 type EditBioProps = { onSaved: () => void };
