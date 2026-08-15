@@ -1,0 +1,29 @@
+.group-info-name {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.group-info-code-chip {
+  background-color: #404249;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.group-info-member-count {
+  color: #949ba4;
+  font-size: 13px;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.group-info-avatar {
+  background-color: #5865f2;
+  width: 32px;
+  height: 32px;
+}
+
+.group-info-member-name {
+  color: white;
+}

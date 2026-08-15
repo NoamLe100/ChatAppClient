@@ -1,0 +1,26 @@
+.message-input-wrap {
+  padding: 16px;
+  border-top: 1px solid #26282c;
+}
+
+.message-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #383a40;
+  border-radius: 24px;
+  padding: 4px 12px;
+}
+
+.message-input-field .MuiInputBase-input {
+  color: white;
+  padding: 8px 0;
+}
+
+.message-input-send-btn.can-send {
+  color: #5865f2 !important;
+}
+
+.message-input-send-btn.cannot-send {
+  color: #4e5058 !important;
+}

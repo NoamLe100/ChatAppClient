@@ -1,0 +1,47 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #313338;
+}
+
+.auth-paper {
+  width: 400px;
+  padding: 32px;
+  border-radius: 8px;
+  background-color: #2b2d31;
+}
+
+.auth-title {
+  color: white;
+  margin-bottom: 16px;
+}
+
+.auth-submit-btn {
+  margin-top: 16px !important;
+}
+
+.auth-toggle-btn {
+  margin-top: 8px !important;
+  color: #949ba4 !important;
+}
+
+.auth-dialog-title {
+  background-color: #2b2d31;
+  color: #f23f42;
+}
+
+.auth-dialog-content {
+  background-color: #2b2d31;
+  color: white;
+  padding-top: 16px !important;
+}
+
+.auth-dialog-actions {
+  background-color: #2b2d31;
+}
+
+.auth-dialog-ok-btn {
+  color: #5865f2 !important;
+}

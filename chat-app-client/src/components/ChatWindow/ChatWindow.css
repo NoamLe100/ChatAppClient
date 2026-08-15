@@ -1,0 +1,81 @@
+.chat-window-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 16px;
+}
+
+.chat-window-empty-icon {
+  font-size: 64px !important;
+  color: #404249;
+}
+
+.chat-window-empty-text {
+  color: #80848e;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-window-header {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #26282c;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.chat-window-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.chat-window-header-info:hover {
+  background-color: #35373c;
+}
+
+.chat-window-header-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #5865f2 !important;
+  font-size: 14px;
+}
+
+.chat-window-header-title {
+  color: white;
+  font-weight: 600;
+}
+
+.chat-window-add-member-btn {
+  background-color: #404249 !important;
+}
+
+.chat-window-add-member-btn:hover {
+  background-color: #4b4e56 !important;
+}
+
+.chat-window-add-member-icon {
+  color: white;
+  font-size: 20px;
+}
+
+.chat-window-dialog-title {
+  background-color: #313338;
+  color: white;
+}
+
+.chat-window-dialog-content {
+  background-color: #313338;
+  padding-top: 16px !important;
+}

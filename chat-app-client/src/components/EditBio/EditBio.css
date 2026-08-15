@@ -1,0 +1,14 @@
+.edit-bio-field .MuiInputBase-input {
+  color: white;
+}
+
+.edit-bio-error {
+  color: #f23f42;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.edit-bio-save-btn {
+  margin-top: 16px !important;
+  background-color: #5865f2 !important;
+}
