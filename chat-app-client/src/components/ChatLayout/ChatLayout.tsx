@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { ChatWindow } from '../ChatWindow/ChatWindow';
 import { getMyChats } from '../../api/chat';
-import { useSocket } from '../../hooks/useSocket';
-import { useAuth } from '../../hooks/useAuth';
+import { useSocketContext as useSocket } from '../../context/SocketContext';
+import { useAuth } from '../../context/AuthContext';
 import { type Chat } from '../../types';
 import './ChatLayout.css';
 
@@ -35,4 +35,4 @@ export function ChatLayout() {
       </div>
     </div>
   );
-} 
+}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Paper, TextField, Button, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { register, login } from '../../api/auth';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from "../../context/AuthContext";
 import './Auth.css';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

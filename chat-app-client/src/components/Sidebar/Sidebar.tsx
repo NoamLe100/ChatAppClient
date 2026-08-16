@@ -8,6 +8,7 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import EditIcon from '@mui/icons-material/Edit';
+import { useAuth } from '../../context/AuthContext';
 import { useSidebarData } from './useSidebarData';
 import { ChatListItem } from './ChatListItem';
 import { SidebarDialogs } from './SidebarDialogs';
@@ -22,6 +23,8 @@ type SidebarProps = {
 };
 
 export function Sidebar({ selectedChatId, onSelectChat }: SidebarProps) {
+  const { userId, userName, name } = useAuth();
+  const displayName = name || userName || '';
   const { chats, myUserId, loadChats, handleLogout } = useSidebarData();
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const [settingsAnchor, setSettingsAnchor] = useState<null | HTMLElement>(null);
@@ -40,6 +43,15 @@ export function Sidebar({ selectedChatId, onSelectChat }: SidebarProps) {
 
   return (
     <div className="sidebar">
+      {userId && (
+        <div className="sidebar-profile">
+          <div className="sidebar-profile-avatar">
+            {displayName[0]?.toUpperCase()}
+          </div>
+          <p className="sidebar-profile-name">{displayName}</p>
+        </div>
+      )}
+
       <div className="sidebar-header">
         <ChatIcon className="sidebar-header-icon" />
         <p className="sidebar-header-title">Your Chats</p>
